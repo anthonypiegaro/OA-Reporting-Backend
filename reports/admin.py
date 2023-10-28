@@ -43,11 +43,11 @@ class ReportTemplateAdmin(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(Assessment)
-# admin.site.register(ReportTemplate, ReportTemplateAdmin)
+admin.site.register(ReportTemplate, ReportTemplateAdmin)
 admin.site.register(Report)
-# admin.site.register(QuantitativeAssessment, CustomQuantitativeAssessmentAdmin)
-# admin.site.register(QuantitativeAssessmentScore)
-# admin.site.register(QualitativeAssessment)
-# admin.site.register(QualitativeAssessmentChoices, QualitativeAssessmentChoiceAdmin)
-# admin.site.register(QualitativeAssessmentScore)
+admin.site.register(QuantitativeAssessment, CustomQuantitativeAssessmentAdmin)
+admin.site.register(QuantitativeAssessmentScore)
+admin.site.register(QualitativeAssessment)
+admin.site.register(QualitativeAssessmentChoices, QualitativeAssessmentChoiceAdmin)
+admin.site.register(QualitativeAssessmentScore)
 admin.site.register(Drill)
