@@ -14,14 +14,14 @@ class CustomUserAdmin(UserAdmin):
     list_filter = ("first_name", "last_name", 'is_staff', 'is_active',)
     fieldsets = (
         (None, {'fields': ('email', "first_name", "last_name")}),
-        ('Permissions', {'fields': ('is_staff', 'is_active')}),
+        ('Permissions', {'fields': ('is_staff', 'is_active', 'is_superuser')}),
     )
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', "first_name", "last_name", 'is_staff', 'password1', 'password2'),
+            'fields': ('email', "first_name", "last_name", 'is_staff', 'is_superuser', 'password1', 'password2'),
         }),
     )
 
 # admin.site.register(CustomUser, CustomUserAdmin)
-admin.site.register(CustomUser)
+admin.site.register(CustomUser, CustomUserAdmin)
