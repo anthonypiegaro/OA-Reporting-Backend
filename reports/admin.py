@@ -34,6 +34,15 @@ class QualitativeAssessmentChoiceAdmin(admin.ModelAdmin):
     list_display = ('assessment', 'choice')
     list_filter = ('assessment', 'choice')
 
+class AssessmentAdmin(admin.ModelAdmin):
+    ordering = ("name",)
+    model = Assessment
+    list_display = ("name", "description")
+    list_filter = ("name", "description")
+    fieldsets = (
+        (None, {'fields': ('name', "description")}),
+    )
+
 class ReportTemplateAdmin(admin.ModelAdmin):
     ordering = ("name",)
     model = ReportTemplate
@@ -42,12 +51,12 @@ class ReportTemplateAdmin(admin.ModelAdmin):
 
 
 # Register your models here.
-admin.site.register(Assessment)
-admin.site.register(ReportTemplate, ReportTemplateAdmin)
+admin.site.register(Assessment, AssessmentAdmin)
+# admin.site.register(ReportTemplate, ReportTemplateAdmin)
 admin.site.register(Report)
-admin.site.register(QuantitativeAssessment, CustomQuantitativeAssessmentAdmin)
-admin.site.register(QuantitativeAssessmentScore)
-admin.site.register(QualitativeAssessment)
-admin.site.register(QualitativeAssessmentChoices, QualitativeAssessmentChoiceAdmin)
-admin.site.register(QualitativeAssessmentScore)
+# admin.site.register(QuantitativeAssessment, CustomQuantitativeAssessmentAdmin)
+# admin.site.register(QuantitativeAssessmentScore)
+# admin.site.register(QualitativeAssessment)
+# admin.site.register(QualitativeAssessmentChoices, QualitativeAssessmentChoiceAdmin)
+# admin.site.register(QualitativeAssessmentScore)
 admin.site.register(Drill)
