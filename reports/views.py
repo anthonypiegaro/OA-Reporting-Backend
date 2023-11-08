@@ -186,3 +186,70 @@ class UserReport(views.APIView):
 
             data.append(assessment_data)
         return Response(data, status=status.HTTP_200_OK)
+
+class UserReportTrainer(views.APIView):
+    permission_classes = [CustomPermission, permissions.IsAuthenticated]
+
+    def get(self, request, template_pk=None, date=None, user_pk=None):
+        user = get_user_model().objects.get(pk=user_pk)
+        template = ReportTemplate.objects.get(pk=template_pk)
+        creation_date = date
+
+        report = Report.objects.filter(
+            user=user,
+            template=template,
+            creation_date=creation_date
+        ).first()
+
+        print(report)
+
+        assessments = report.assessments.all()
+
+        data = []
+
+        for assessment in assessments:
+            name = assessment.name
+            type = assessment.assessment_type
+            description = assessment.description
+            unit = assessment.unit
+            
+            if type == "quantitative":
+                passing_score = assessment.quantitative_details.passing_score
+                quantitative_obj = QuantitativeAssessmentScore.objects.get(
+                    user=user,
+                    assessment=assessment,
+                    quantitative_assessment=assessment.quantitative_details,
+                    report=report
+                )
+                score = quantitative_obj.score
+                passed = quantitative_obj.passed()
+            else:
+                passing_score = assessment.qualitative_details.passing_score.choice
+                qualitative_obj = QualitativeAssessmentScore.objects.get(
+                    assessment=assessment,
+                    qualitative_assessment=assessment.qualitative_details,
+                    user=user,
+                    report=report
+                )
+                score = qualitative_obj.score.choice
+                passed = qualitative_obj.passed()
+            drills = []
+            drill_objs = assessment.drills.all()
+            for drill in drill_objs:
+                drill_name = drill.name
+                drill_url = drill.url
+                drills.append({"name": drill_name, "drill_url": drill_url})
+
+            assessment_data = {
+                "name": name,
+                "type": type,
+                "description": description,
+                "unit": unit,
+                "passing_score": passing_score,
+                "score": score,
+                "passed": passed,
+                "drills": drills
+            }
+
+            data.append(assessment_data)
+        return Response(data, status=status.HTTP_200_OK)
