@@ -17,10 +17,9 @@ class CustomQuantitativeAssessmentAdmin(admin.ModelAdmin):
     model = QuantitativeAssessment
     list_display = ("assessment", "passing_score", "passing_condition")
     list_filter = ("assessment", "passing_score", "passing_condition")
-    # fieldsets = (
-    #     (None, {'fields': ('email', "first_name", "last_name")}),
-    #     ('Permissions', {'fields': ('is_staff', 'is_active')}),
-    # )
+    fieldsets = (
+        (None, {'fields': ("passing_score", "passing_condition")}),
+    )
     # add_fieldsets = (
     #     (None, {
     #         'classes': ('wide',),
@@ -54,7 +53,7 @@ class ReportTemplateAdmin(admin.ModelAdmin):
 admin.site.register(Assessment, AssessmentAdmin)
 # admin.site.register(ReportTemplate, ReportTemplateAdmin)
 admin.site.register(Report)
-# admin.site.register(QuantitativeAssessment, CustomQuantitativeAssessmentAdmin)
+admin.site.register(QuantitativeAssessment, CustomQuantitativeAssessmentAdmin)
 # admin.site.register(QuantitativeAssessmentScore)
 # admin.site.register(QualitativeAssessment)
 # admin.site.register(QualitativeAssessmentChoices, QualitativeAssessmentChoiceAdmin)
