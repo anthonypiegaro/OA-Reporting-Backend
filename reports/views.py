@@ -40,6 +40,13 @@ class ReportTemplateViewSet(viewsets.ModelViewSet):
         report_dates = Report.objects.filter(template=template, user=user).values("creation_date").distinct().order_by("-creation_date")
         return Response(report_dates, status=status.HTTP_200_OK)
 
+    @action(detail=True, methods=["GET"])
+    def report_dates_user(self, request, pk=None, user_pk=None):
+        template = self.get_object()
+        user = get_user_model().objects.get(pk=user_pk)
+        report_dates = Report.objects.filter(template=template, user=user).values("creation_date").distinct().order_by("-creation_date")
+        return Response(report_dates, status=status.HTTP_200_OK)
+
 
 class ReportTemplateListVeiwset(viewsets.ReadOnlyModelViewSet):
     queryset = ReportTemplate.objects.all()
