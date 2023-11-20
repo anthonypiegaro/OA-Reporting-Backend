@@ -72,6 +72,7 @@ class QuantitativeAssessmentScore(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     report = models.ForeignKey(Report, on_delete=models.CASCADE)
     score = models.DecimalField(max_digits=5, decimal_places=2)
+    did_not_test = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.user.first_name + ' ' + self.user.last_name}'s score for {self.assessment} for report {self.report.template.name}"
@@ -133,6 +134,7 @@ class QualitativeAssessmentScore(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     report = models.ForeignKey(Report, on_delete=models.CASCADE)
     score = models.ForeignKey(QualitativeAssessmentChoices, on_delete=models.CASCADE)
+    did_not_test = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.user.first_name + ' ' + self.user.last_name}'s score for {self.assessment.name} for report {self.report.template.name}"
