@@ -141,8 +141,6 @@ class UserReport(views.APIView):
             creation_date=creation_date
         ).first()
 
-        print(report)
-
         assessments = report.assessments.all()
 
         data = []
