@@ -161,6 +161,7 @@ class UserReport(views.APIView):
                 )
                 score = quantitative_obj.score
                 passed = quantitative_obj.passed()
+                did_not_test = quantitative_obj.did_not_test
             else:
                 passing_score = assessment.qualitative_details.passing_score.choice
                 qualitative_obj = QualitativeAssessmentScore.objects.get(
@@ -171,6 +172,7 @@ class UserReport(views.APIView):
                 )
                 score = qualitative_obj.score.choice
                 passed = qualitative_obj.passed()
+                did_not_test = quantitative_obj.did_not_test
             drills = []
             drill_objs = assessment.drills.all()
             for drill in drill_objs:
@@ -186,6 +188,7 @@ class UserReport(views.APIView):
                 "passing_score": passing_score,
                 "score": score,
                 "passed": passed,
+                "did_not_test": did_not_test,
                 "drills": drills
             }
 
