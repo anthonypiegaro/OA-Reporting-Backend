@@ -63,6 +63,8 @@ class HandleReportForm(views.APIView):
         # permissions.IsAuthenticated handles checking if user is authenticated
         user = get_user_model().objects.get(pk=data["userId"])
 
+        did_not_test_ids = set(data["didNotTest"])
+
         # check if template_id has a real template
         try:
             template_id = data["templateId"]
@@ -94,6 +96,8 @@ class HandleReportForm(views.APIView):
                 for assessment, assessment_data in assessments.items():
                     assessment_obj = Assessment.objects.get(pk=assessment_data["id"])
                     report.assessments.add(assessment_obj)
+                    
+                    did_not_test = True if assessment_data["id"] in did_not_test_ids else False
 
                     if assessment_data["type"] == "qualitative":
                         choice = assessment_data["value"]
@@ -103,7 +107,8 @@ class HandleReportForm(views.APIView):
                             qualitative_assessment=assessment_obj.qualitative_details,
                             user=user,
                             report=report,
-                            score=choice_obj
+                            score=choice_obj,
+                            did_not_test=did_not_test
                         )
                     elif assessment_data["type"] == "quantitative":
                         score = Decimal(assessment_data["value"])
@@ -112,7 +117,8 @@ class HandleReportForm(views.APIView):
                             quantitative_assessment=assessment_obj.quantitative_details,
                             user=user,
                             report=report,
-                            score=score
+                            score=score,
+                            did_not_test=did_not_test
                         )
                     else:
                         raise ValueError("Assessment type")
