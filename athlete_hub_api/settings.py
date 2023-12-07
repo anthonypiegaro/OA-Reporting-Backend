@@ -198,6 +198,11 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(days=30),  # Maximum lifetime of a refresh token is 30 days
 }
 
+EMAIL_BACKEND = "django_sendgrid_v5.mail.backends.sendgrid.SendgridBackend"
+SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+DEFAULT_FROM_EMAIL = "optimumathletesreporting@gmail.com"
+
 # CORS_ALLOW_ALL_ORIGINS = False
 # # update to frontend url when deployed
 # CORS_ALLOWED_ORIGINS = [
