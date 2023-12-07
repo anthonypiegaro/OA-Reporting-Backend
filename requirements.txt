@@ -14,3 +14,4 @@ dj-database-url>=2.0,<3.0
 whitenoise[brotli]>=6.0,<7.0
 psycopg[c]; sys_platform == "linux"
 psycopg[binary]; sys_platform != "linux"
+sendgrid==6.9.0
