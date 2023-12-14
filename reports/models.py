@@ -155,7 +155,10 @@ class Drill(models.Model):
 class TemplateAssessmentRelationship(models.Model):
     template = models.ForeignKey(ReportTemplate, verbose_name="template", on_delete=models.CASCADE)
     assessment = models.ForeignKey(Assessment, verbose_name="assessment", on_delete=models.CASCADE)
-    order = models.IntegerField()
+    order = models.IntegerField(default=1)
+
+    class Meta:
+        unique_together = ("template", "assessment")
 
     def __str__(self):
         return f"Template: {self.template.name} | Assessment: {self.assessment.name} | Order: {self.order}"
