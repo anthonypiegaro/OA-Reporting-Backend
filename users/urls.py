@@ -15,4 +15,4 @@ urlpatterns = [
     path("logout/", LogoutView.as_view(), name="logout"),
     path("simple-list-users/", CustomUserList.as_view({'get': 'list'}), name="simple_users"),
     path("is-staff/", CustomUserIsStaff.as_view(), name="is_staff"),
-]
+] 

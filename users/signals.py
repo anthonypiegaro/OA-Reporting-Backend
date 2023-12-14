@@ -24,7 +24,7 @@ def send_confirmation_email(sender, instance, created, **kwargs):
             subject="Welcome to Optimum Athletes Reporting",
             plain_text_content="Your Optimum Athletes Data Dashboard has been created.\n\n" + \
             f'Go to optimumathletesreporting.com \n\n' + \
-            f'To sign in, use {instance.email} for the email\n' + \
+            f'To sign in, use {instance.email} for the email.\n' + \
             "Your password is Baseball + Initials + @. For example:\n" + \
             "Athlete Name: John Doe - Password: Baseballjd@"
         )

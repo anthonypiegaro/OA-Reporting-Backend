@@ -21,6 +21,7 @@ from .serializers import (
     ReportTemplateListSerializer
 )
 
+
 class ReportTemplateViewSet(viewsets.ModelViewSet):
     queryset = ReportTemplate.objects.all()
     serializer_class = ReportTemplateSerializer
@@ -133,6 +134,7 @@ class HandleReportForm(views.APIView):
         
         return Response({"Report created"}, status=status.HTTP_200_OK)
 
+
 class UserReport(views.APIView):
     permission_classes = [CustomPermission, permissions.IsAuthenticated]
 
@@ -200,6 +202,7 @@ class UserReport(views.APIView):
 
             data.append(assessment_data)
         return Response(data, status=status.HTTP_200_OK)
+
 
 class UserReportTrainer(views.APIView):
     permission_classes = [CustomPermission, permissions.IsAuthenticated]

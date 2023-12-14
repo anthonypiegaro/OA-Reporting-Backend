@@ -150,3 +150,12 @@ class Drill(models.Model):
 
     def __str__(self):
         return f"{self.name} is recommended drill"
+
+
+class TemplateAssessmentRelationship(models.Model):
+    template = models.ForeignKey(ReportTemplate, verbose_name="template", on_delete=models.CASCADE)
+    assessment = models.ForeignKey(Assessment, verbose_name="assessment", on_delete=models.CASCADE)
+    order = models.IntegerField()
+
+    def __str__(self):
+        return f"Template: {self.template.name} | Assessment: {self.assessment.name} | Order: {self.order}"
