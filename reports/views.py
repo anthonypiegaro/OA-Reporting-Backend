@@ -12,6 +12,7 @@ from .models import (
     QualitativeAssessmentChoices,
     QualitativeAssessmentScore,
     QuantitativeAssessmentScore,
+    TemplateAssessmentRelationship
 )
 from .permissions import CustomPermission
 from .serializers import (
@@ -31,6 +32,20 @@ class ReportTemplateViewSet(viewsets.ModelViewSet):
     def assessments(self, request, pk=None):
         template = self.get_object()
         assessments = template.assessments.all()
+        # assessment_order = {}
+        # for assessment in assessments:
+        #     try:
+        #         order = TemplateAssessmentRelationship.objects.get(
+        #             template=template,
+        #             assessment=assessment
+        #         ).order
+        #         assessment_order[assessment.id] = order
+        #     except TemplateAssessmentRelationship.DoesNotExist:
+        #         assessment_order[assessment.id] = float("inf")
+
+        # sorted_assessments = sorted(
+        #     assessments,
+        #     key=lambda assessment: assessment_order.get(assessment.id, float("inf")))
         serializer = AssessmentWithChoicesSerializer(assessments, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 

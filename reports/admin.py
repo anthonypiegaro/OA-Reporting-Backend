@@ -9,7 +9,7 @@ from .models import (
     QualitativeAssessmentScore,
     QuantitativeAssessmentScore,
     QualitativeAssessmentChoices,
-    Drill
+    Drill,
 )
 
 class CustomQuantitativeAssessmentAdmin(admin.ModelAdmin):
@@ -50,9 +50,9 @@ class ReportTemplateAdmin(admin.ModelAdmin):
 
 
 # Register your models here.
-admin.site.register(Assessment, AssessmentAdmin)
-# admin.site.register(ReportTemplate, ReportTemplateAdmin)
-admin.site.register(Report)
+# admin.site.register(Assessment, AssessmentAdmin)
+admin.site.register(ReportTemplate, ReportTemplateAdmin)
+# admin.site.register(Report)
 admin.site.register(QuantitativeAssessment, CustomQuantitativeAssessmentAdmin)
 # admin.site.register(QuantitativeAssessmentScore)
 # admin.site.register(QualitativeAssessment)
