@@ -1,3 +1,10 @@
 from django.contrib import admin
+from .models import (
+    Pitch,
+    FullPitchReport,
+    PitchReport,
+)
 
-# Register your models here.
+admin.site.register(Pitch)
+admin.site.register(FullPitchReport)
+admin.site.register(PitchReport)
