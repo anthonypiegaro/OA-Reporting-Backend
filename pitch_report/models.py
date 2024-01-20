@@ -8,7 +8,7 @@ class Pitch(models.Model):
         return self.name
 
 
-class Report(models.Model):
+class FullPitchReport(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     date = models.DateField()
     document_file = models.FileField(upload_to="pdfs/", blank=True, null=True)
@@ -20,7 +20,7 @@ class Report(models.Model):
 
 class PitchReport(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    report = models.ForeignKey(Report, on_delete=models.CASCADE)
+    report = models.ForeignKey(FullPitchReport, on_delete=models.CASCADE)
     pitch = models.ForeignKey(Pitch, on_delete=models.CASCADE)
     velocity = models.DecimalField(max_digits=4, decimal_places=1)
     spin = models.IntegerField()
