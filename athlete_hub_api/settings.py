@@ -57,7 +57,8 @@ INSTALLED_APPS = [
     "corsheaders",
     "users",
     "reports",
-    "pitch_arsenal",
+    # "pitch_arsenal",
+    "pitch_report",
 ]
 
 MIDDLEWARE = [
@@ -194,7 +195,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # Access token expires in 30 minutes
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=7),  # Access token expires in 30 minutes
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=7),  # Refresh token expires after 7 days of inactivity
     'SLIDING_TOKEN_LIFETIME': timedelta(days=30),  # Maximum lifetime of a refresh token is 30 days
 }
