@@ -57,7 +57,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "users",
     "reports",
-    # "pitch_arsenal",
+    "pitch_arsenal",
     "pitch_report",
 ]
 
